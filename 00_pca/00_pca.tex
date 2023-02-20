@@ -56,10 +56,11 @@ setpagesize=false,
 なるべく一般的なものを用いるようにするが、一応確認しておいてもらいたい。
 $$
 \begin{aligned}
-  & \mathbb{R}:\text{実数}\qquad\forall:\text{任意の}\qquad\exists:\text{ある（〇〇が存在する）}\\
+  & \mathbb{R}:\text{実数}\qquad\mathbb{N}:\text{自然数}\qquad\forall:\text{任意の}\qquad\exists:\text{ある（存在する）}\\
   & ^\forall x \in \mathbb{R}:\text{実数値をとる任意の変数} x \\
   & p(X=x):\text{確率変数} X \text{の値が} x \text{となる確率}\\
   & ^\exists\mathbf{x}\in\mathbb{R}^n:\text{ある実数} n \text{次元ベクトル}\mathbf{x}\\
+  & \text{iff: if and only if}
 \end{aligned}
 $$
 
@@ -67,7 +68,7 @@ $$
 \subsection{あれもこれもベクトル}
 線形代数というと、ベクトルや行列を扱うことは有名であると思う。私も学部一年で線形代数を学んだ時に単位はもらえたため、それくらいのことは覚えていたが、
 正直なところ、当時は線形代数が生物学にどう生きているか全く理解していなかった。しかし、世の中は実にベクトルに溢れていると言える。そして、細胞も「見方によっては」ベクトルであると言える。
-ここでは、この認識のギャップを埋めつつ、「見方によっては」のニュアンスを掴んでもらいたい。
+ここでは、そのニュアンスを掴んでもらいたい。
 
 実は、ベクトルを扱う上で、それと同時にベクトルの帰属する全体集合であるベクトル空間を考えていることになるのであるが、ベクトル空間とは、以下の定義を満たすものであれば
 何でもベクトル空間なのである（厳密な定義はまた別の機会におこなう）。
@@ -85,8 +86,8 @@ $$
 中でも注目してもらいたいのが、「足し算ができる」という性質と、「スカラー積ができる」という性質であり、これらをまとめて「線形性」と呼ぶ。幾分か当たり前のように見えただろうか。だとすれば、それは自然科学の様々な現象がベクトルを使って表記されているから（すなわち、線形的な数学的構造に依存しているから）であろう。また、ベクトルと聞いた際に、「高校数学で扱った三角形の問題で使ったな」のような、幾何ベクトルのイメージから脱却してもらえただろうか。もちろん、高校の幾何ベクトルもベクトルの一側面であることには間違いないのであるが、幾何ベクトルだけがベクトルなのではなく、線形性があるもののことをベクトルというのである。
 
 さて、先ほど細胞も「見方によっては」ベクトルと言ったが、これはどういうことだろうか。例として、single cell RNA sequencing（scRNA-seq）のデータを考える。
-例えば、ある細胞についての$D$個の遺伝子群の転写量が$\log_2(TPM+1)$で与えられているとしよう（$^\forall\mathbf{x}\in\mathbb{R}^D$とする）。
-また、別の細胞に対応するデータ$^\forall\mathbf{y}\in\mathbb{R}^D$を考えると、$\mathbf{x+y}$を考えることは何ら不自然ではないであろう。また、何らかの実数$^\forall\alpha\in\mathbb{R}$によってスカラー倍して、$\alpha\mathbf{x}$を考えることも全く自然なことであろう。
+例えば、ある細胞についての$d$個の遺伝子群の転写量が$\log_2(TPM+1)$で与えられているとしよう（$^\forall\mathbf{x}\in\mathbb{R}^d$とする）。
+また、別の細胞に対応するデータ$^\forall\mathbf{y}\in\mathbb{R}^d$を考えると、$\mathbf{x+y}$を考えることは何ら不自然ではないであろう。また、何らかの実数$^\forall\alpha\in\mathbb{R}$によってスカラー倍して、$\alpha\mathbf{x}$を考えることも全く自然なことであろう。
 実際、全遺伝子について発現量の平均値を計算することに疑問を持たないのであれば、足し算やスカラー積の操作についても前提として許していることになる。
 そして、このように線形性をもつため、scRNA-seqデータはベクトルであり、scRNA-seqデータはベクトル空間に存在することになる。
 
@@ -119,6 +120,34 @@ $$
 \section{PCAに必要な線形代数}
 
 \hypertarget{bases_and_dim}{\subsection{一次独立性・基底・次元}}
+\subsubsection{一次結合}
+ここでは、まず一次結合というタームについて触れておく。ちなみに、一次結合・一次独立・一次従属などのタームを用いていくが、それぞれ線型結合・線型独立・線形従属といっても差し支えない。
+結局、線形性とは一次関数のように、足せたり、定数倍できるような概念ということを踏まえれば、一次〇〇といっても線形〇〇といっても同じであることがわかりやすいであろう。
+
+さておき、$^\forall i\in\mathbb{N}$に対して、任意のベクトル空間を$V$として、$^\forall\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_i\in V$を考える
+（今後、特に前置きがない場合は$\mathbf{x}$のフォントで書かれたものについては、任意のベクトル空間$V$の元とする）。
+これら$\mathbf{x}_1,\cdots,\mathbf{x}_i$の一次結合とは、$^\forall\alpha^1,\alpha^2,\cdots,\alpha^i\in\mathbb{R}$を用いて、$\sum_{k=1}^{i}\alpha^k\mathbf{x}_k$と書くことである。
+また、$\mathbf{y}:=\sum_{k=1}^{i}\alpha^k\mathbf{x}_k$の場合、$\mathbf{y}$は$\mathbf{x}_1,\cdots,\mathbf{x}_i$の一次結合であるという。
+ちなみに、$\alpha^k$は何らかの$\alpha$の$k$乗という意味ではなく、序数を右肩に書いているだけである。このような表記をとるメリットは$\alpha^{k}$自体は$V$の元ではないことが序数の位置によってもわかり、視認性が良くなることである。
+
+\subsubsection{一次独立・一次従属}
+次に一次独立の定義について述べる。ただし、$\mathbf{0}$は零ベクトルを示す。
+$$
+\begin{aligned}
+  Def)& ^\forall\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_i\in V\text{が一次独立}\\
+  :\Leftrightarrow & ^\forall\mathbf{y},\mathbf{z}\in V, ^\forall\alpha^1,\alpha^2,\cdots,\alpha^i,\beta^1,\beta^2,\cdots\beta^i\in\mathbb{R},\\
+  & \mathbf{y}=\sum_{k=1}^{i}\alpha^k\mathbf{x}_k,\mathbf{z}=\sum_{k=1}^{i}\beta^k\mathbf{x}_k,\mathbf{y}=\mathbf{z}\;\text{iff}\; ^\forall k\in\{1,2,\cdots,i\},\alpha^k=\beta^k\\
+  :\Leftrightarrow & \sum_{k=1}^{i}\alpha^k\mathbf{x}_i=\mathbf{0}\;\text{iff}\;\alpha^1=\alpha^2=\cdots=\alpha^i=0
+\end{aligned}
+$$
+なお、一次独立でないベクトルの組のことを一次従属といい、さらに一次独立なベクトルの一次結合で表されるベクトルも一次従属であると表現される。
+
+\subsubsection{次元・基底}
+次元とは、一次独立なベクトルの組の構成要素の最大数のことである。基底とは、次元数と同じ数の一次独立なベクトルの組のことを指す。
+例えば、$n$次元ベクトル空間では、$^\forall\mathbf{x}_1,\mathbf{x}_2,\cdots,\mathbf{x}_n$のように一次独立な組を考えると、それらは基底となる。
+また、基底の取り方は一意ではなく、$^\forall\mathbf{y}_1,\mathbf{y}_2,\cdots,\mathbf{y}_n$のように基底を取っても良い。
+しかし、$^\forall\mathbf{z}_1,\mathbf{z}_2,\cdots,\mathbf{z}_n,\mathbf{z}_{n+1}$のようにベクトルの組を考えると、次元数は$n$であるため一次従属となるので、これらは基底ではない。
+一方で、無限次元ベクトル空間の場合には、有限であればいくらでも多くのベクトルの組を基底として考えることができる。
 
 \hypertarget{innerprod}{\subsection{内積と直交性}}
 
@@ -189,6 +218,13 @@ $$
 \end{aligned}
 $$
 \subsubsection{余因子展開}
+まずは、一般化された方法を述べる。$^\forall n,i,j\in\mathbb{N},n\geq i,j,3$とし、任意の$n\times n$行列を$A$とする。
+また、$A$の$i$行$j$列成分を$a_{ij}$、$A$から$i$行目及び$j$列目を抜粋してできる$(n-1)\times(n-1)$行列を$\overline{A_{ij}}$と表記することにする。このとき以下が成立する。
+$$
+\begin{aligned}
+  detA=\sum_{k=1}^{n}(-1)^{i+k}a_{ik}\cdot det\overline{A_{ik}}
+\end{aligned}
+$$
 
 \subsubsection{サラスの公式}
 特に、$4\times 4$正方行列以上の行列式を求める際に、$3\times 3$正方行列の余因子展開の結果を公式として
@@ -221,11 +257,11 @@ $$
 
 \hypertarget{eigen}{\subsection{固有値分解}}
 \subsubsection{固有値・固有ベクトルの幾何的な意味}
-固有値・固有ベクトルとは基底変換に紐づいた概念である。任意の変換行列$A$があり、その変換行列で零ベクトルでない、ある特殊なベクトル$\mathbf{v}$を線形変換すると、
-変換前のベクトル$\mathbf{v}$と変換後のベクトル$A\mathbf{v}$に関してちょうどある実数$\lambda$によってスカラー倍したとき等しくなるような、特殊な関係（$A\mathbf{v}=\lambda\mathbf{v}$）が成立しているとする。
-このとき、$A$による変換は$\mathbf{v}$の方向に関して、$\lambda$倍拡大させる変換と捉えることができる。
+固有値・固有ベクトルとは基底変換に紐づいた概念である。任意の変換行列$A$があり、その変換行列で零ベクトルでない、ある特殊なベクトル$\mathbf{x}$を線形変換すると、
+変換前のベクトル$\mathbf{x}$と変換後のベクトル$A\mathbf{x}$に関してちょうどある実数$\lambda$によってスカラー倍したとき等しくなるような、特殊な関係（$A\mathbf{x}=\lambda\mathbf{x}$）が成立しているとする。
+このとき、$A$による変換は$\mathbf{x}$の方向に関して、$\lambda$倍拡大させる変換と捉えることができる。
 
-この$\mathbf{v}$のような性質をもつベクトルを固有ベクトルといい、$\mathbf{v}$に対する$\lambda$のようなスカラーのことを固有値という。
+この$\mathbf{x}$のような性質をもつベクトルを固有ベクトルといい、$\mathbf{x}$に対する$\lambda$のようなスカラーのことを固有値という。
 そのため、固有値は固有ベクトル方向への"空間の拡大率"のように捉えることができる。
 
 \subsubsection{固有値分解の計算方法}

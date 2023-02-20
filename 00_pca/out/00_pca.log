@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.0.0-u1.28-220214-2.6 (utf8.uptex) (TeX Live 2022) (preloaded format=uplatex 2022.4.5)  20 FEB 2023 15:36
+This is e-upTeX, Version 3.141592653-p4.0.0-u1.28-220214-2.6 (utf8.uptex) (TeX Live 2022) (preloaded format=uplatex 2022.4.5)  20 FEB 2023 17:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -613,57 +613,62 @@ LaTeX Font Info:    Font shape `JT2/mc/m/n' will be
 (Font)              scaled to size 4.8111pt on input line 59.
 [2] [3]
 LaTeX Font Info:    Font shape `JT2/mc/bx/n' in size <10> not available
-(Font)              Font shape `JT2/gt/m/n' tried instead on input line 126.
+(Font)              Font shape `JT2/gt/m/n' tried instead on input line 123.
 LaTeX Font Info:    Font shape `JT2/gt/m/n' will be
-(Font)              scaled to size 9.6222pt on input line 126.
+(Font)              scaled to size 9.6222pt on input line 123.
 LaTeX Font Info:    Font shape `JY2/mc/bx/n' in size <10> not available
-(Font)              Font shape `JY2/gt/m/n' tried instead on input line 126.
+(Font)              Font shape `JY2/gt/m/n' tried instead on input line 123.
 LaTeX Font Info:    Font shape `JY2/gt/m/n' will be
-(Font)              scaled to size 9.6222pt on input line 126.
-[4] [5] [6] [7] [8]
+(Font)              scaled to size 9.6222pt on input line 123.
+[4]
+Overfull \hbox (2.62604pt too wide) in paragraph at lines 127--132
+[]\JY2/mc/m/n/10 さておき 、 $[]\OML/cmm/m/it/10 i \OMS/cmsy/m/n/10 2 \U/msb/m/n/10 N$ \JY2/mc/m/n/10 に対して 、 任意のベクトル空間を $\OML/cmm/m/it/10 V$ \JY2/mc/m/n/10 として 、 $[]\OT1/cmr/bx/n/10 x[]\OML/cmm/m/it/10 ; \OT1/cmr/bx/n/10 x[]\OML/cmm/m/it/10 ; []  ; \OT1/cmr/bx/n/10 x[] \OMS/cmsy/m/n/10 2
+ []
+
+[5] [6] [7] [8] [9] [10]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 286.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\times' on input line 286.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 286.
+(hyperref)                removing `math shift' on input line 322.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 286.
+(hyperref)                removing `\times' on input line 322.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\times' on input line 286.
+(hyperref)                removing `math shift' on input line 322.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 286.
+(hyperref)                removing `math shift' on input line 322.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 288.
+(hyperref)                removing `\times' on input line 322.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 288.
+(hyperref)                removing `math shift' on input line 322.
 
-[9] [10] (out/00_pca.aux)
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 324.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 324.
+
+[11] [12] (out/00_pca.aux)
 Package rerunfilecheck Info: File `00_pca.out' has not changed.
-(rerunfilecheck)             Checksum: 48246263EEA8EB440889FDB8D4C57193;6077.
+(rerunfilecheck)             Checksum: 04CC192D7E20F41B63B331B03EF3B958;6521.
  ) 
 Here is how much of TeX's memory you used:
- 22796 strings out of 478716
- 439012 string characters out of 5858226
- 715448 words of memory out of 5000000
- 40853 multiletter control sequences out of 15000+600000
+ 22797 strings out of 478716
+ 439028 string characters out of 5858226
+ 715904 words of memory out of 5000000
+ 40854 multiletter control sequences out of 15000+600000
  512493 words of font info for 89 fonts, out of 8000000 for 9000
  929 hyphenation exceptions out of 8191
- 98i,15n,103p,967b,475s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 98i,15n,103p,967b,396s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on out/00_pca.dvi (10 pages, 52756 bytes).
+Output written on out/00_pca.dvi (12 pages, 59756 bytes).
