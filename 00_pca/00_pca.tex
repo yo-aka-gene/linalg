@@ -10,8 +10,7 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{amsfonts}
-\usepackage{amscd}
-\usepackage{tikz-cd}
+\usepackage{arydshln}
 
 \hypersetup{
 setpagesize=false,
@@ -226,6 +225,30 @@ $$
 \end{aligned}
 $$
 
+$A=(a_{ij})_{i,j\in\{1,2,3\}}$として、1行目で展開した時の例は以下の通り.
+$$
+\begin{aligned}
+  detA&=det\left(\begin{array}{c:c:c}
+    a_{11}&a_{12}&a_{13}\\ \hline
+    a_{21}&a_{22}&a_{23}\\
+    a_{31}&a_{32}&a_{33}
+  \end{array}\right)\\
+  &=(-1)^{(1+1)}a_{11}\begin{vmatrix}
+    a_{22}&a_{23}\\
+    a_{32}&a_{33}
+  \end{vmatrix}+(-1)^{(1+2)}a_{12}\begin{vmatrix}
+    a_{21}&a_{23}\\
+    a_{31}&a_{33}
+  \end{vmatrix}+(-1)^{(1+3)}a_{13}\begin{vmatrix}
+    a_{21}&a_{22}\\
+    a_{31}&a_{32}
+  \end{vmatrix}\\
+  &=a_{11}(a_{21}a_{33}-a_{23}a_{32})-a_{12}(a_{21}a_{33}-a_{23}a_{31})+a_{13}(a_{21}a_{32}-a_{22}a_{31})\\
+  &=a_{11}a_{22}a_{33}-a_{11}a_{23}a_{32}-a_{12}a_{21}a_{33}+a_{12}a_{23}a_{31}+a_{13}a_{21}a_{32}-a_{13}a_{22}a_{31}
+\end{aligned}
+$$
+$n\geq 4$の場合についても、余因子展開を入れ子にして$2\times 2$行列まで小さくすることで行列式を計算することができる。
+
 \subsubsection{サラスの公式}
 特に、$4\times 4$正方行列以上の行列式を求める際に、$3\times 3$正方行列の余因子展開の結果を公式として
 用いると計算が楽になる。
@@ -251,13 +274,14 @@ $$
   \item $\begin{vmatrix} 1 & 1 & 2 \\ 1 & 2 & 1 \\ 2 & 1 & 1 \end{vmatrix}$
   \item $\begin{vmatrix} 1 & 1 & 2 \\ 1 & 2 & 1 \\ 3 & 5 & 4 \end{vmatrix}$
   \item $\begin{vmatrix} 1 & 1 & 3 \\ 1 & 2 & 5 \\ 2 & 0 & 2 \end{vmatrix}$
+  \item $\begin{vmatrix} 1 & 1 & 0 & 0 \\ 1 & 2 & 3 & 4 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1\end{vmatrix}$
 \end{enumerate}
 \subsubsection{基底変換行列の行列式}
 基底変換行列の行列式は、変換による基底の向きの変化や、変換による基底の伸縮など、幾何学的に重要な様々な情報の尺度である。また、行列式が0となる変換行列は、逆変換に対応する逆行列がないため、変換行列による座標系の変換は点と点の1対1対応関係がないことを意味している。
 
 \hypertarget{eigen}{\subsection{固有値分解}}
 \subsubsection{固有値・固有ベクトルの幾何的な意味}
-固有値・固有ベクトルとは基底変換に紐づいた概念である。任意の変換行列$A$があり、その変換行列で零ベクトルでない、ある特殊なベクトル$\mathbf{x}$を線形変換すると、
+固有値・固有ベクトルとは基底変換に紐づいた概念である。任意の正方行列による変換行列$A$があり、その変換行列で零ベクトルでない、ある特殊なベクトル$\mathbf{x}$を線形変換すると、
 変換前のベクトル$\mathbf{x}$と変換後のベクトル$A\mathbf{x}$に関してちょうどある実数$\lambda$によってスカラー倍したとき等しくなるような、特殊な関係（$A\mathbf{x}=\lambda\mathbf{x}$）が成立しているとする。
 このとき、$A$による変換は$\mathbf{x}$の方向に関して、$\lambda$倍拡大させる変換と捉えることができる。
 
@@ -265,8 +289,41 @@ $$
 そのため、固有値は固有ベクトル方向への"空間の拡大率"のように捉えることができる。
 
 \subsubsection{固有値分解の計算方法}
+固有値・固有ベクトルの定義から出発する。$^\forall n\in\mathbb{N}$、$A$を任意の$n\times n$正方行列、$I$を$n\times n$単位行列としたとき、次を満たす$^\exists\mathbf{x}\in V(dimV=n),\mathbf{x}\neq\mathbf{0},^\exists\lambda\in\mathbb{R}$について
+$$
+\begin{aligned}
+  A\mathbf{x}=\lambda\mathbf{x}\Leftrightarrow(A-\lambda I)\mathbf{x}=\mathbf{0}
+\end{aligned}
+$$
+ここで、$\mathbf{x}\neq\mathbf{0}$の条件に注目して、仮に$det(A-\lambda I)\neq0$として逆行列$(A-\lambda I)^{-1}$の存在を認めてしまうと、
+両辺に左から$(A-\lambda I)^{-1}$をかけると$\mathbf{x}=\mathbf{0}$となり矛盾してしまう。
+$$
+\begin{aligned}
+  \therefore det(A-\lambda I)=0
+\end{aligned}
+$$
+これを固有方程式といい、これを解くと固有値$\lambda$を求めることができる。固有方程式は$\lambda$についての$n$次方程式となるため、重複を含めて$n$個の解が存在する。
+固有値が分かれば$A-\lambda I$が定数行列となるため、$(A-\lambda I)\mathbf{x}=\mathbf{0}$を実現する$\mathbf{x}$を何か一つでも見つければそれが固有ベクトルとなる。
+$(A-\lambda I)\mathbf{x}=\mathbf{0}$が不定問題であることや、固有ベクトルの定義から、固有ベクトルを定数倍したベクトルもまた固有ベクトルであることから、固有ベクトルは一意的でない。
+そのため、仮に$\tilde{\mathbf{x}}$を固有ベクトルの一つとして見つけたとすると、「$k\tilde{\mathbf{x}}(^\forall k\in\mathbb{R})$」のような表記が差し支えない。
+また、固有値の数だけ固有ベクトルが存在するため全て算出する必要がある。
 \subsubsection{例題}
 末尾に\hyperlink{q2}{解答解説}を用意したので適宜確認されたい。
+\begin{enumerate}
+  \item $\begin{pmatrix}1&3\\-1&5\end{pmatrix}$の固有値と対応する固有ベクトルを求めよ
+  \item $\begin{pmatrix}1&0&0\\1&2&4\\5&0&3\end{pmatrix}$の固有値と対応する固有ベクトルを求めよ
+\end{enumerate}
+
+\subsubsection{半正定値行列と固有値}
+ここで、半正定値行列を紹介する。定義は以下の通りである。
+$$
+\begin{aligned}
+  Def)&^\forall A:n\times n\text{実対称行列が半正定値}(^\forall n\in\mathbb{N})\\
+  :\Leftrightarrow&^\forall \mathbf{x}\in\mathbb{R}^n,\mathbf{x}\neq\mathbf{0}\;\text{s.t.}\; A\mathbf{x}\cdot\mathbf{x}\geq0\\
+  :\Leftrightarrow&^\forall\lambda:A\text{の固有値}\;\text{s.t.}\;\lambda\geq 0
+\end{aligned}
+$$
+半正定値行列の直接的な定義は内積を用いた定義であるが、同値条件として任意の固有値が非負ものがあり、これは重要な性質である。
 
 \section{PCAに必要な確率統計}
 分散共分散行列の定義までさらっと触れられれば十分なので、確率論などの込み入った話は置いておいて、ごくごく簡単に紹介する。
@@ -304,6 +361,16 @@ $$
   \Sigma=E[(\mathbf{X}-E[\mathbf{X}])(\mathbf{X}-E[\mathbf{X}])^\top]
 \end{aligned}
 $$
+ちなみに、$\Sigma$は半正定値行列であり、$^\forall \mathbf{x}\in\mathbb{R}^d,\mathbf{x}\neq\mathbf{0}$を確率変数でない任意のベクトルとして、$\Sigma\mathbf{x}$と$\mathbf{x}$の内積を求めると、以下のように常に非負となる。
+$$
+\begin{aligned}
+  \Sigma\mathbf{x}\cdot\mathbf{x}&=\mathbf{x}^\top\Sigma\mathbf{x}=\mathbf{x}^\top E[(\mathbf{X}-E[\mathbf{X}])(\mathbf{X}-E[\mathbf{X}])^\top]\mathbf{x}\\
+  &=E[\mathbf{x}^\top (\mathbf{X}-E[\mathbf{X}])(\mathbf{X}-E[\mathbf{X}])^\top \mathbf{x}]\\
+  &=E[(\mathbf{x}\cdot(\mathbf{X}-E[\mathbf{X}]))((\mathbf{X}-E[\mathbf{X}])\cdot\mathbf{x})]\\
+  &=E[(\mathbf{x}\cdot(\mathbf{X}-E[\mathbf{X}]))^2]\geq 0
+\end{aligned}
+$$
+すなわち、$\Sigma$の固有値は全て非負となる。
 
 \section{PCAについて}
 $^\forall n,d\in\mathbb{N},n\geq d$のとき、$n\times d$行列であるデータセットに対応する、確率変数$X_1,X_2,\cdots X_d$の分散共分散行列で$d\times d$行列の$\Sigma$を考える。
@@ -318,7 +385,7 @@ $^\forall n,d\in\mathbb{N},n\geq d$のとき、$n\times d$行列であるデー�
 \subsection{固有ベクトルによる基底変換}
 \subsection{補足1：なぜ最大の分散をとる操作が固有値分解になるのか？}
 ラグランジュの未定定数法
-\subsection{補足2：応用}
+\subsection{補足2：実用上の注意事項}
 \subsubsection{$n\times d$ vs $d\times n$}
 \subsubsection{データリスケーリング}
 \subsubsection{$n<d$の場合}
@@ -331,6 +398,7 @@ $^\forall n,d\in\mathbb{N},n\geq d$のとき、$n\times d$行列であるデー�
   \item $\begin{vmatrix} 1 & 1 & 2 \\ 1 & 2 & 1 \\ 2 & 1 & 1 \end{vmatrix}=1\cdot 2\cdot 1+1\cdot 1\cdot 2+2\cdot 1\cdot 1-1\cdot 1\cdot 1-2\cdot 2\cdot 2-1\cdot 1\cdot 1=-4$
   \item $\begin{vmatrix} 1 & 1 & 2 \\ 1 & 2 & 1 \\ 3 & 5 & 4 \end{vmatrix}=1\cdot 2\cdot 4+1\cdot 1\cdot 3+2\cdot 1\cdot 5-1\cdot 1\cdot 5-2\cdot 2\cdot 3-1\cdot 1\cdot 4=0$
   \item $\begin{vmatrix} 1 & 1 & 3 \\ 1 & 2 & 5 \\ 2 & 0 & 2 \end{vmatrix}=1\cdot 2\cdot 2+1\cdot 5\cdot 2+3\cdot 1\cdot 0-1\cdot 5\cdot 0-3\cdot 2\cdot 2-1\cdot 1\cdot 2=0$
+  \item $\begin{vmatrix} 1 & 1 & 0 & 0 \\ 1 & 2 & 3 & 4 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1\end{vmatrix}=-1\cdot1\cdot1+1\cdot2\cdot1-1\cdot3\cdot0+1\cdot4\cdot0=1$
 \end{enumerate}
 \subsubsection{補足：一次従属性と行列式}
 3.と4.の行列式は0となったが、3.は行基本変形、4.は列基本変形をするとそれぞれ3行目と3列目の成分を全て0にすることが可能なことにお気づきだろうか。
@@ -358,7 +426,28 @@ $$
 この場合、仮に$\mathbf{x},\mathbf{y},\mathbf{z}$が基底であっても、
 行列式が0となる変換行列をかけると、基底の数が減ってしまうのである。
 実際に$\mathbf{a},\mathbf{b}$は基底であっても$\mathbf{c}$はこれらの一次結合で表せるため、基底ではない。
+このように、$^\forall n,m\in\mathbb{N},n>m$のとき$n\times n$行列に対して一次独立な行ないしは列が$m$個しかない状態をランク落ちという。
+
+なお、5.については二行目で余因子展開をした結果、1,2列目を除いた場合は単位行列（行列式は1）となり、3,4列目を除いた場合はランク落ちしているため行列式が0となることを利用した
+（行基本変形によって$4\times4$単位行列を作ることができるのは明らか）。
 
 \hypertarget{q2}{\subsection{固有値分解}}
-
+\begin{enumerate}
+  \item $\lambda=4$のとき$s\begin{pmatrix}1\\1\end{pmatrix}$、$\lambda=2$のとき$t\begin{pmatrix}3\\1\end{pmatrix}$（$^\forall s,t\in\mathbb{R}$）
+  \item $\lambda=1$のとき$s\begin{pmatrix}2\\18\\-5\end{pmatrix}$、$\lambda=2$のとき$t\begin{pmatrix}0\\1\\0\end{pmatrix}$、$\lambda=3$のとき$u\begin{pmatrix}0\\4\\1\end{pmatrix}$（$^\forall s,t,u\in\mathbb{R}$）
+\end{enumerate}
+\subsubsection{補足：ある文字に関する情報が消えている不定問題}
+2.の$\lambda=2$の際に固有ベクトルを求めようとすると、$^\forall(p,q,r)^\top\in\mathbb{R}^3$として、以下の連立方程式を解くことになる。
+$$
+\begin{aligned}
+  \begin{pmatrix}
+    -1&0&0\\1&0&4\\5&0&1
+  \end{pmatrix}\begin{pmatrix}
+    p\\q\\r
+  \end{pmatrix}=\begin{pmatrix}
+    -p\\p+qz\\5p+q
+  \end{pmatrix}=\mathbf{0}
+\end{aligned}
+$$
+これを解くと、$p=q=0$となるが、$r$に関する情報がない。このような場合は、$r$は任意の実数値を取っても差し支えないと判断できる。
 \end{document}
