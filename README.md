@@ -1,2 +1,7 @@
-# linalg
-introduction of linear algebra for biologists
+# バイオマンでも多様体が知りたい
+- 線形代数&ベクトル解析の備忘録
+
+## 目的
+- 自分の備忘録
+- 説明の練習
+- latexに慣れる
