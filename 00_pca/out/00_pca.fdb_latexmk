@@ -1,10 +1,10 @@
 # Fdb version 3
-["dvipdf"] 1676939951 "out/00_pca.dvi" "out/00_pca.pdf" "out/00_pca" 1676939952
-  "out/00_pca.dvi" 1676939951 77328 9b5d34859d92141f00feffd4aa40697d "latex"
+["dvipdf"] 1676959923 "out/00_pca.dvi" "out/00_pca.pdf" "out/00_pca" 1676959924
+  "out/00_pca.dvi" 1676959923 84552 b14a106a26dddee30612b4f10ed3e21d "latex"
   (generated)
   "out/00_pca.pdf"
-["latex"] 1676939950 "/Users/yujiokano/Desktop/linalg/00_pca/00_pca.tex" "out/00_pca.dvi" "00_pca" 1676939952
-  "/Users/yujiokano/Desktop/linalg/00_pca/00_pca.tex" 1676939949 40826 0491f9a499abf30110b0c37f4d5917b4 ""
+["latex"] 1676959922 "/Users/yujiokano/Desktop/linalg/00_pca/00_pca.tex" "out/00_pca.dvi" "00_pca" 1676959924
+  "/Users/yujiokano/Desktop/linalg/00_pca/00_pca.tex" 1676959920 45808 8207646031be382230ace284ebc995cd ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -101,9 +101,9 @@
   "/usr/local/texlive/2022/texmf-dist/web2c/texmf.cnf" 1646502317 40171 cdab547de63d26590bebb3baff566530 ""
   "/usr/local/texlive/2022/texmf-var/web2c/euptex/uplatex.fmt" 1649150637 2801498 e57a664fe24446ab737ac878fb85a294 ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "00_pca.tex" 1676939949 40826 0491f9a499abf30110b0c37f4d5917b4 ""
-  "out/00_pca.aux" 1676939951 7323 7bf98fd9d71c6e1ac346218899b77048 "latex"
-  "out/00_pca.out" 1676939951 7814 fbb69fff77781140e886bfca2212155b "latex"
+  "00_pca.tex" 1676959920 45808 8207646031be382230ace284ebc995cd ""
+  "out/00_pca.aux" 1676959923 7462 2ddafd65bbbdc021b9cd2bc2b528aa78 "latex"
+  "out/00_pca.out" 1676959923 7962 f6805f180491c830eba4f19533036f50 "latex"
   (generated)
   "out/00_pca.aux"
   "out/00_pca.dvi"
