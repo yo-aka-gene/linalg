@@ -23,7 +23,7 @@ setpagesize=false,
 
 \title{バイオマンでも多様体が知りたい－00\\〜PCAをノリで理解しないことから開始〜}
 \author{\href{mailto:yujiokano@keio.jp}{岡野雄士}}
-\date{2023/02/17}
+\date{2023/02/20}
 
 
 \begin{document}
@@ -73,7 +73,7 @@ $$
 何でもベクトル空間なのである（厳密な定義はまた別の機会におこなう）。
 $$
 \begin{aligned}
-  Def)&\quad\text{ベクトル空間} V:\\
+  \hypertarget{vecsp}{Def)&\quad\text{ベクトル空間} V:}\\
   1.& \text{要素同士の足し算をすることができる}\\
   2.& \text{要素に対してスカラー積（例：実数倍）を行うことができる。}\\
   3.& \text{要素同士の足し算とスカラー積の順番を入れ替えられる}\\
@@ -149,6 +149,64 @@ $$
 一方で、無限次元ベクトル空間の場合には、有限であればいくらでも多くのベクトルの組を基底として考えることができる。
 
 \hypertarget{innerprod}{\subsection{内積と直交性}}
+\subsubsection{内積とノルム}
+高校で幾何ベクトルを習った際には、ベクトルと内積はセットで習ったが、\hyperlink{vecsp}{ベクトル空間の定義}に内積は必要ないし、自然に導出もされない。
+しかし、高校で扱ったベクトルや一般教養でやった線形代数で内積が使えたのは、計量空間というベクトル空間に内積を導入した特別な空間を扱っていたからであり、それは計量空間の方が性質が良いからである。
+ここで内積の定義を確認すると以下の通りである。
+$$
+\begin{aligned}
+  Def)&\text{内積}(\_\cdot\_):V\times V\rightarrow\mathbb{R}\;\text{s.t.}\;^\forall\mathbf{x},\mathbf{y},\mathbf{z}\in V\\
+  1.&\mathbf{x}\cdot\mathbf{x}\geq 0\\
+  2.&\mathbf{x}\cdot\mathbf{x}=0\;\text{iff}\;\mathbf{x}=\mathbf{0}\\
+  3.&^\forall\alpha,\beta\in\mathbb{R},(\alpha\mathbf{x}+\beta\mathbf{y}\cdot\mathbf{z})=\alpha(\mathbf{x}\cdot\mathbf{z})+\beta(\mathbf{y}\cdot\mathbf{z})\\
+  4.&\mathbf{x}\cdot\mathbf{y}=\mathbf{y}\cdot\mathbf{x}
+\end{aligned}
+$$
+定義の通り、内積は2つのベクトルを受け取り、実数値を返す写像であり、特別な性質はいくつか要求しているものの幾分か抽象的な概念である。
+しかし、以下のようなベクトルを受け取り実数値を返すことでベクトルに"大きさ"の概念を与えることのできる、ノルムというこれまた抽象的な概念を定義すると、
+内積とノルムの不思議な関連性が見えてくる。
+$$
+\begin{aligned}
+  Def)&\text{ノルム}\|\_\|:V\rightarrow\mathbb{R}\;\text{s.t.}\;^\forall\mathbf{x},\mathbf{y}\in V,^\forall\alpha\in\mathbb{R}\\
+  1.&\|\mathbf{x}\|=0\;\text{iff}\;\mathbf{x}=\mathbf{0}\\
+  2.&\|\alpha\mathbf{x}\|=|\alpha|\|\mathbf{x}\|\\
+  3.&\|\mathbf{x}+\mathbf{y}\|=\|\mathbf{x}\|+\|\mathbf{y}\|
+\end{aligned}
+$$
+
+\subsubsection{Caucy-Schwartzの不等式と$L^2$ノルム}
+ここまで内積とノルムの定義を確認したが、どちらも抽象的な定義であり、実際に内積もノルムもいくつもの構成方法が存在する。
+しかし、内積によってノルムを構成することで、定義にありありとした意味が宿るようになるのである。この、内積とノルムをつなぐ式が以下のCaucy-Schwartzの不等式である（証明はまた別の機会に行う）。
+$$
+\begin{aligned}
+  Theorem)&\text{Caucy-Schwartzの不等式}\\
+  &^\forall\mathbf{x},\mathbf{y}\in V,(\mathbf{x}\cdot\mathbf{y})^2\leq\mathbf{x}\cdot\mathbf{x}+\mathbf{y}\cdot\mathbf{y}\\
+\end{aligned}
+$$
+Caucy-Schwartzの不等式を用いることで、$\sqrt{\mathbf{x}}$
+
+\subsubsection{角度・直交性}
+
+\subsubsection{正規直交基底と$n$次元ユークリッド空間}
+ここまでは実は$n$次元ユークリッド空間を説明するための準備段階であったが、最後に正規直交基底の定義を紹介する。
+ただし、$^\forall V:\text{計量空間},dimV=:n\in\mathbb{N},\{\mathbf{e}_1,\mathbf{e}_2,\cdots,\mathbf{e}_n\}:V\text{の基底}$とする。
+$$
+\begin{aligned}
+  Def)&\text{正規直交基底}\{\mathbf{e}_1,\mathbf{e}_2,\cdots,\mathbf{e}_n\}:\\
+  1.&^\forall i\in\{1,2,\cdots,n\},\|\mathbf{e}_i\|=1\\
+  2.&^\forall i,j\in\{1,2,\cdots,n\},\mathbf{e}_i\cdot\mathbf{e}_j=0\;\text{iif}\;i\neq j
+\end{aligned}
+$$
+ここまで道具が揃うことでようやく、以下のように、$n$次元ユークリッド空間を定義することができる。
+$$
+\begin{aligned}
+  Def)&n\text{次元ユークリッド空間}V:\\
+  1.&dimV=n\in\mathbb{N}\\
+  2.&\{\mathbf{e}_i|^\forall i\in\{1,2,\cdots,n\},\mathbf{e}_i\in V\}:\text{正規直交基底}\\
+  3.&^\forall\mathbf{x},\mathbf{y}\in V, \mathbf{x}:=\sum_{i=1}^nx^i\mathbf{e}_i,\mathbf{y}:=\sum_{i=1}^ny^i\mathbf{e}_i(^\forall x^i,y^i\in\mathbb{R}),\\
+  &\mathbf{x}\cdot\mathbf{y}:=\sum_{i=1}^nx^iy^i
+\end{aligned}
+$$
 
 \subsection{基底変換行列}
 \subsubsection{導入：「基底による表記」と「座標系による表記」}
